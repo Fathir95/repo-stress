@@ -341,7 +341,6 @@
             50% { opacity: 0.3; transform: scale(0.7); }
         }
 
-        /* Toast */
         .toast {
             display: none;
             position: fixed;
@@ -469,7 +468,7 @@
                 <label><i class="fas fa-user" style="margin-right: 6px;"></i> Username / Email</label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope"></i>
-                    <input type="text" id="loginEmail" placeholder="Masukkan username atau email" value="renzuis@stresser.com" />
+                    <input type="text" id="loginEmail" placeholder="Masukkan username atau email" />
                 </div>
             </div>
 
@@ -477,7 +476,7 @@
                 <label><i class="fas fa-lock" style="margin-right: 6px;"></i> Password</label>
                 <div class="input-wrapper">
                     <i class="fas fa-key"></i>
-                    <input type="password" id="loginPassword" placeholder="••••••••" value="stresser123" />
+                    <input type="password" id="loginPassword" placeholder="Masukkan password" />
                     <button type="button" class="toggle-pass" id="toggleBtn">
                         <i class="fas fa-eye"></i>
                     </button>
@@ -488,7 +487,7 @@
                 <label class="remember">
                     <input type="checkbox" checked /> Ingat saya
                 </label>
-                <a href="reset-password.html" class="forgot">
+                <a href="forgot-password.html" class="forgot">
                     <i class="fas fa-key" style="margin-right: 4px;"></i> Lupa password?
                 </a>
             </div>
@@ -554,9 +553,20 @@
                 }
             }
 
-            // Jika tidak ada di localStorage, cek default (demo)
-            if (email === 'renzuis@stresser.com' && password === 'stresser123') {
-                showToast('✅ BERHASIL', 'Selamat datang kembali!', 'success');
+            // Default account (hanya untuk testing)
+            if (email.toLowerCase() === 'admin@renzuis.com' && password === 'admin123') {
+                // Buat default account jika belum ada
+                if (!stored) {
+                    const defaultUser = {
+                        name: 'Administrator',
+                        email: 'admin@renzuis.com',
+                        password: 'admin123',
+                        duration: 365,
+                        registeredDate: new Date().toISOString()
+                    };
+                    localStorage.setItem('userData', JSON.stringify(defaultUser));
+                }
+                showToast('✅ BERHASIL', 'Selamat datang Admin!', 'success');
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
                 }, 1500);
@@ -566,7 +576,6 @@
             showToast('❌ GAGAL', 'Email atau password salah!', 'error');
         });
 
-        // Enter key support
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 document.getElementById('loginBtn').click();
