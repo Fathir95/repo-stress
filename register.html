@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Renzuis Stresser · Register</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0b0d15;
+            font-family: 'Inter', sans-serif;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(120, 50, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 200, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(255, 0, 200, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+
+        .register-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            background: rgba(15, 17, 29, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 2.5rem;
+            padding: 2.8rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .register-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 2.5rem;
+            padding: 2px;
+            background: conic-gradient(from 0deg, #7c3aed, #2563eb, #06b6d4, #a855f7, #7c3aed);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: rotateGlow 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes rotateGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, #1e1b3a, #0f0d1f);
+            border-radius: 24px;
+            font-size: 2.2rem;
+            color: #a855f7;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.08);
+        }
+
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #c084fc, #60a5fa, #c084fc);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes shimmerText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .brand .sub {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group label i {
+            color: #a855f7;
+            font-size: 0.8rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            transition: all 0.25s;
+            overflow: hidden;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12), inset 0 0 20px rgba(124, 58, 237, 0.02);
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: #475569;
+            font-size: 1rem;
+            transition: 0.25s;
+            pointer-events: none;
+        }
+
+        .input-wrapper:focus-within i {
+            color: #a855f7;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #f1f5f9;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #475569;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper select {
+            appearance: none;
+            cursor: pointer;
+            padding-right: 2.5rem;
+        }
+
+        .input-wrapper select option {
+            background: #1a1d2e;
+            color: #f1f5f9;
+        }
+
+        .input-wrapper .select-arrow {
+            position: absolute;
+            right: 16px;
+            color: #475569;
+            pointer-events: none;
+            font-size: 0.9rem;
+        }
+
+        .toggle-pass {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #475569;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .toggle-pass:hover {
+            color: #a855f7;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .info-item .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .info-item .value {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #c084fc, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-item .value i {
+            -webkit-text-fill-color: initial;
+            color: #a855f7;
+            font-size: 0.8rem;
+            margin-right: 4px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #7c3aed, #2563eb);
+            border: none;
+            border-radius: 16px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2);
+            position: relative;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .btn-register::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(124, 58, 237, 0.35);
+        }
+
+        .btn-register:active {
+            transform: scale(0.97);
+        }
+
+        .btn-register i {
+            margin-right: 10px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.8rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #a855f7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .login-link a:hover {
+            color: #c084fc;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(168, 85, 247, 0.06);
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            border: 1px solid rgba(168, 85, 247, 0.08);
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulseDot 1.8s ease-in-out infinite;
+        }
+
+        /* Toast Notification */
+        .toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            background: rgba(15, 17, 29, 0.95);
+            backdrop-filter: blur(16px);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            min-width: 300px;
+            animation: slideDown 0.5s ease;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .toast .icon {
+            font-size: 2rem;
+            color: #22c55e;
+            margin-bottom: 0.3rem;
+        }
+
+        .toast h3 {
+            color: #f1f5f9;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+        }
+
+        .toast p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+        }
+
+        @media (max-width: 480px) {
+            .register-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2rem;
+            }
+
+            .brand h1 {
+                font-size: 1.3rem;
+            }
+
+            .brand .icon-badge {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .btn-register {
+                font-size: 0.9rem;
+                padding: 0.9rem;
+            }
+
+            .toast {
+                min-width: 90%;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .register-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="icon"><i class="fas fa-check-circle"></i></div>
+        <h3>REGISTRASI BERHASIL!</h3>
+        <p>Mengalihkan ke dashboard...</p>
+    </div>
+
+    <div class="register-card">
+        <div class="brand">
+            <div class="icon-badge">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h1>RENZUIS STRESSER<br /><span style="font-size:0.7em; font-family:'Inter',sans-serif; -webkit-text-fill-color:#94a3b8;">register new account</span></h1>
+            <div class="sub">
+                <i class="fas fa-shield-alt"></i> · secure registration · <i class="fas fa-shield-alt"></i>
+            </div>
+        </div>
+
+        <form id="registerForm" autocomplete="off">
+            <!-- Nama -->
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user-circle"></i>
+                    <input type="text" id="fullName" placeholder="Masukkan nama lengkap" value="Renzu Is" required />
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Username / Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Masukkan email" value="renzuis@stresser.com" required />
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="password" placeholder="••••••••" value="stresser123" required />
+                    <button type="button" class="toggle-pass" id="toggleBtn">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Durasi -->
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> Durasi (hari)</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-calendar-alt"></i>
+                    <select id="durationSelect">
+                        <option value="7">7 hari</option>
+                        <option value="14">14 hari</option>
+                        <option value="30" selected>30 hari</option>
+                        <option value="60">60 hari</option>
+                        <option value="90">90 hari</option>
+                        <option value="180">180 hari</option>
+                        <option value="365">365 hari</option>
+                    </select>
+                    <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+            </div>
+
+            <!-- Info Grid -->
+            <div class="info-grid" id="infoGrid">
+                <div class="info-item">
+                    <span class="label"><i class="fas fa-hourglass-half"></i> Durasi</span>
+                    <span class="value" id="displayDuration">30 <span style="font-size:0.6em; -webkit-text-fill-color:#94a3b8;">hari</span></span>
+                </div>
+                <div class="info-item">
+                    <span class="label"><i class="fas fa-hourglass-end"></i> Waktu Habis</span>
+                    <span class="value" id="displayExpiry"><i class="fas fa-calendar-check"></i> 01/08/2026</span>
+                </div>
+            </div>
+
+            <!-- Tombol Register -->
+            <button type="button" class="btn-register" id="registerBtn">
+                <i class="fas fa-user-plus"></i> REGISTER
+            </button>
+
+            <!-- Login Link -->
+            <div class="login-link">
+                Sudah punya akun? <a href="index.html">Login di sini</a>
+            </div>
+
+            <!-- Status -->
+            <div style="display: flex; justify-content: center;">
+                <div class="status-badge">
+                    <span class="dot"></span> sistem aktif · v2.4.1
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Toggle password
+        const toggleBtn = document.getElementById('toggleBtn');
+        const passwordInput = document.getElementById('password');
+
+        toggleBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+
+        // Update durasi & waktu habis
+        const durationSelect = document.getElementById('durationSelect');
+        const displayDuration = document.getElementById('displayDuration');
+        const displayExpiry = document.getElementById('displayExpiry');
+
+        function updateExpiry() {
+            const days = parseInt(durationSelect.value);
+            const now = new Date();
+            const expiry = new Date(now);
+            expiry.setDate(now.getDate() + days);
+
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            const formatted = expiry.toLocaleDateString('id-ID', options);
+
+            displayDuration.innerHTML = `${days} <span style="font-size:0.6em; -webkit-text-fill-color:#94a3b8;">hari</span>`;
+            displayExpiry.innerHTML = `<i class="fas fa-calendar-check"></i> ${formatted}`;
+        }
+
+        durationSelect.addEventListener('change', updateExpiry);
+        updateExpiry();
+
+        // ===== REGISTER FUNCTION =====
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            // Ambil data dari form
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const duration = parseInt(durationSelect.value);
+
+            // Validasi sederhana
+            if (!fullName || !email || !password) {
+                alert('⚠️ Semua field harus diisi!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('⚠️ Password minimal 6 karakter!');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert('⚠️ Email tidak valid!');
+                return;
+            }
+
+            // === SIMPAN DATA KE LOCAL STORAGE ===
+            const userData = {
+                name: fullName,
+                email: email,
+                password: password,
+                duration: duration,
+                registeredDate: new Date().toISOString()
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            // === TAMPILKAN TOAST ===
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+
+            // === REDIRECT KE DASHBOARD SETELAH 1.5 DETIK ===
+            setTimeout(function() {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        });
+
+        // Enter key support
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('registerBtn').click();
+            }
+        });
+    </script>
+
+</body>
+</html>
